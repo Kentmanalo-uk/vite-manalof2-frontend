@@ -1,19 +1,15 @@
-import React from 'react';
-
-// icons are React components from lucide-react
-const Card = ({ Icon, title, description, ctaLabel = "Learn more", onCta }) => {
+import React from "react";
+const Card = ({ car, onClick }) => {
   return (
-    <div className="card">
-      <div className="card-icon">
-        {Icon ? <Icon size={36} /> : null}
-      </div>
-      <h3 className="card-title">{title}</h3>
-      <p className="card-desc">{description}</p>
-      <div className="card-cta">
-        <button className="card-btn" onClick={onCta}>{ctaLabel}</button>
-      </div>
-    </div>
-  );
-}
-
-export default Card;
+ <div
+      onClick={onClick}
+      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2" >
+      <div className="overflow-hidden"></div>
+      <img
+        src={car.image}
+        alt={car.name}
+        className="w-full h-56 object-cover transform hover:scale-110 transition-transform duration-500"
+/>
+</div>
+      
+    
