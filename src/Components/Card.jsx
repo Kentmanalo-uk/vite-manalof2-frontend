@@ -1,15 +1,15 @@
 import React from "react";
-const Card = ({ car, onClick }) => {
+
+function Card({ image, title, description }) {
   return (
- <div
-      onClick={onClick}
-      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2" >
-      <div className="overflow-hidden"></div>
-      <img
-        src={car.image}
-        alt={car.name}
-        className="w-full h-56 object-cover transform hover:scale-110 transition-transform duration-500"
-/>
-</div>
-      
-    
+    <div className="bg-white text-black rounded-2xl shadow-lg overflow-hidden hover:scale-105 transform transition duration-300">
+      <img src={image} alt={title} className="w-full h-56 object-cover" />
+      <div className="p-4">
+        <h3 className="text-xl font-bold mb-2">{title}</h3>
+        <p className="text-gray-700">{description}</p>
+      </div>
+    </div>
+  );
+}
+
+export default Card;
