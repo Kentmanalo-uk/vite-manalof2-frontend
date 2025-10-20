@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import PrimaryButton from "../components/primarybutton";
+import PrimaryButton from "../components/PrimaryButton";
 import useOnScreen from "../hooks/useOnScreen";
+
 
 function LandingPage() {
   const [showModal, setShowModal] = useState(false);
@@ -10,16 +11,16 @@ function LandingPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000); // 2 seconds loading
+    const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
-  // Handlers
-  const handleExplore = () => navigate("/listing");
-  const handleOrder = () => navigate("/order");
-
-  // Refs for animations
-  const [aboutTextRef, aboutTextVisible] = useOnScreen({ threshold: 0.1 });
+  
+  const handleExplore =() => navigate("/kisting");
+  const handleOrder =() => navigate("/order");
+  
+  //animations
+   const [aboutTextRef, aboutTextVisible] = useOnScreen({ threshold: 0.1 });
   const [aboutImageRef, aboutImageVisible] = useOnScreen({ threshold: 0.1 });
   const aboutVisible = aboutTextVisible || aboutImageVisible;
 
@@ -27,57 +28,47 @@ function LandingPage() {
   const [careImageRef, careImageVisible] = useOnScreen({ threshold: 0.1 });
   const careVisible = careTextVisible || careImageVisible;
 
-if (loading) {
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white relative">
-      
-      <div className="absolute w-56 h-56 bg-white/30 rounded-full blur-3xl"></div>
-
-      {/* Gear GIF */}
-      <img
-        src="/wheel-unscreen.gif"
-        alt="Loading gear"
-        className="w-28 h-28 mb-10 animate-pulse relative z-10 -mt-12"
-      />
-
-      {/* White loading bar */}
-      <div className="w-64 h-2 bg-white/80 rounded-full mb-6"></div>
-
-      <p className="text-gray-300 text-sm italic animate-pulse">
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
+         <div className="absolute w-56 h-56 bg-white/30 rounded-full blur-3xl"></div>
+        <img
+          src="/wheel-unscreen.gif"
+          alt="Loading"
+          className="w-28 h-28 mb-6 animate-pulse"
+        />
+        <div className="w-64 h-2 bg-white/80 rounded-full mb-6"></div>
+<p className="text-gray-300 text-sm italic animate-pulse">
         Loading... Please wait
       </p>
-    </div>
-  );
-}
+      </div>
+    );
+  }
 
-  // ✅ Main Page after loading
   return (
-   <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white flex flex-col items-center justify-center px-6 py-24 overflow-hidden">
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 py-24">
       {/* Title */}
       <h1
     className="text-5xl md:text-6xl font-extrabold text-sky-400 mb-3 tracking-wide 
                drop-shadow-[0_0_25px_rgba(56,189,248,1)] 
                animate-fadeInSlow 
                transition-all duration-500"
-    style={{
-      textShadow:
-        "0 0 20px #38bdf8, 0 0 40px #38bdf8, 0 0 60px #38bdf8, 0 0 80px #0ea5e9",
-      filter: "brightness(1.4)",
-    }}
-  >
-    Car-ris
-  </h1>
-
+        style={{
+          textShadow: "0 0 20px #38bdf8, 0 0 40px #0ea5e9",
+            filter: "brightness(1.4)",
+        }}
+      >
+        Car-ris
+      </h1>
       <p className="text-lg md:text-xl text-gray-300 mb-12 italic animate-fastPulse">
         Buying a car just got a whole lot easier.
       </p>
 
-      {/* Navigation */}
-      <nav className="mb-14 animate-fadeIn">
-        <ul className="flex items-center space-x-2 text-lg font-sans">
+      {/* Navigation Links */}
+      <nav className="mb-12">
+        <ul className="flex items-center space-x-4 text-lg font-medium">
           <li>
-            <Link
-              to="/"
+            <Link  to="/"
               className="font-semibold tracking-wide text-white hover:text-sky-300 transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.7)]"
             >
               Home
@@ -94,7 +85,7 @@ if (loading) {
           </li>
           <li className="text-gray-500">|</li>
           <li>
-            <Link
+             <Link
               to="/order"
               className="font-semibold tracking-wide text-white hover:text-sky-300 transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(56,189,248,0.7)]"
             >
@@ -104,7 +95,6 @@ if (loading) {
         </ul>
       </nav>
 
-      {/* Car Cards */}
       <div className="flex flex-col md:flex-row gap-8 max-w-5xl mb-12 w-full">
         <div
           onClick={() => setSelectedImage("/furisticcar.jpg")}
@@ -138,8 +128,10 @@ if (loading) {
           </div>
         </div>
       </div>
+     {/*BUTT*/}
 
-      {/* Buttons */}
+     
+      {/* Placeholder Buttons */}
       <div className="flex gap-6 animate-fadeIn">
         <PrimaryButton
           label="Explore Cars"
@@ -153,7 +145,6 @@ if (loading) {
         />
       </div>
 
-      {/* Notice Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
           <div className="bg-white text-black p-6 rounded-xl max-w-lg w-full shadow-2xl text-center">
@@ -169,8 +160,7 @@ if (loading) {
         </div>
       )}
 
-      {/* Image Preview Modal */}
-      {selectedImage && (
+        {selectedImage && (
         <div
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 backdrop-blur-sm"
           onClick={() => setSelectedImage(null)}
@@ -188,8 +178,7 @@ if (loading) {
           </button>
         </div>
       )}
-
-      {/* About Section */}
+     {/* About Section */}
       <section id="about" className="max-w-6xl mt-32">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div
@@ -218,7 +207,6 @@ if (loading) {
         </div>
       </section>
 
-      {/* Customer Care */}
       <section id="customer-care" className="max-w-6xl mt-32">
         <div className="flex flex-col md:flex-row items-center gap-8">
           <div
@@ -256,5 +244,6 @@ if (loading) {
     </div>
   );
 }
-
 export default LandingPage;
+
+

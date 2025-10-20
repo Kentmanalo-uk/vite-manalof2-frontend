@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Modal({ car, onClose }) {
   const [confirming, setConfirming] = useState(false);
   const navigate = useNavigate();
   if (!car) return null;
+
   const handleProceed = () => setConfirming(true);
   const handleCancelConfirm = () => setConfirming(false);
+
   const handleFinalProceed = () => {
     navigate("/order", { state: { car } }); // Pass car to order page
   };
-  
-    return (
+
+  return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
       <div className="bg-white text-black p-6 rounded-xl max-w-lg w-full shadow-2xl relative overflow-y-auto max-h-[90vh]">
         {/* car image */}
@@ -20,6 +22,7 @@ export default function Modal({ car, onClose }) {
           alt={car.name}
           className="rounded-lg mb-4 w-full h-60 object-cover"
         />
+
         {/* car info */}
         <h2 className="text-2xl font-bold mb-2">{car.name}</h2>
         <p className="text-gray-700 mb-4">{car.description}</p>
@@ -44,6 +47,7 @@ export default function Modal({ car, onClose }) {
             ))}
           </ul>
         </div>
+
         {/* buttons */}
         <div className="flex justify-end space-x-4">
           <button
@@ -60,7 +64,7 @@ export default function Modal({ car, onClose }) {
           </button>
         </div>
 
-       {/* confirmation  */}
+        {/* confirmation  */}
         {confirming && (
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
             <div className="bg-white text-black p-6 rounded-xl max-w-sm w-full shadow-xl text-center animate-fadeIn">
@@ -88,4 +92,3 @@ export default function Modal({ car, onClose }) {
     </div>
   );
 }
-

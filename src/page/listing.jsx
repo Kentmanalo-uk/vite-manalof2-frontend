@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "../Components/Modal";
 
 function Listing() {
-    const [selectedCar, setSelectedCar] = useState(null);
+  const [selectedCar, setSelectedCar] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const carsPerPage = 6;
@@ -189,8 +189,9 @@ function Listing() {
       ]
     },
   ];
- //paginatiom
- const indexOfLastCar = currentPage * carsPerPage;
+
+  // Pagination logic
+  const indexOfLastCar = currentPage * carsPerPage;
   const indexOfFirstCar = indexOfLastCar - carsPerPage;
   const currentCars = cars.slice(indexOfFirstCar, indexOfLastCar);
   const totalPages = Math.ceil(cars.length / carsPerPage);
@@ -230,6 +231,8 @@ function Listing() {
           </div>
         ))}
       </div>
+
+      {/* Pagination Controls */}
       <div className="flex justify-center items-center space-x-4 mt-12">
         <button
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
@@ -256,6 +259,7 @@ function Listing() {
             {i + 1}
           </button>
         ))}
+
         <button
           onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
           disabled={currentPage === totalPages}
@@ -268,6 +272,8 @@ function Listing() {
           Next
         </button>
       </div>
+
+      {/* Modal (Buy Confirmation) */}
       <Modal car={selectedCar} onClose={() => setSelectedCar(null)} />
 
       {/* Image Preview Modal */}
@@ -290,5 +296,4 @@ function Listing() {
   );
 }
 
-        
 export default Listing;
